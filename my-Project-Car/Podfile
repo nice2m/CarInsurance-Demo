@@ -1,0 +1,22 @@
+# Uncomment this line to define a global platform for your project
+platform :ios, '8.0'
+# Uncomment this line if you're using Swift
+# use_frameworks!
+
+target 'my-Project-Car' do
+
+end
+
+target 'my-Project-CarTests' do
+
+end
+
+target 'my-Project-CarUITests' do
+
+end
+
+pod 'SDWebImage'
+
+pod 'AFNetworking','~>2.6.3'
+
+pod 'RESideMenu'
