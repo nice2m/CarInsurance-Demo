@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -139,25 +139,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mqj-GD-T2r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="991" y="699"/>
+            <point key="canvasLocation" x="986" y="591"/>
         </scene>
         <!--Detail View Controller-->
-        <scene sceneID="btM-bY-JU1">
+        <scene sceneID="bQi-3a-H4C">
             <objects>
-                <viewController storyboardIdentifier="DetailViewController" id="zI7-yP-Exg" customClass="DetailViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewController" id="eiH-hg-d72" customClass="DetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="b0d-hG-t8D"/>
-                        <viewControllerLayoutGuide type="bottom" id="fng-S6-hk6"/>
+                        <viewControllerLayoutGuide type="top" id="KXl-Gp-Y3w"/>
+                        <viewControllerLayoutGuide type="bottom" id="nOa-L0-sIw"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="RVI-ZA-SaM">
+                    <view key="view" contentMode="scaleToFill" id="CsL-LF-Tvg">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="e0F-Yu-7cm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ylb-0r-Kbg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="991" y="1408"/>
+            <point key="canvasLocation" x="980" y="1277"/>
         </scene>
         <!--News-->
         <scene sceneID="d0I-oH-p2k">
