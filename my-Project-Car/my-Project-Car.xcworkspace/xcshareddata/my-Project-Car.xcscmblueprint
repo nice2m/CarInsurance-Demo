@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "B9AB945E242A1489C0ADF9CDF706BEBEE78DB5EA",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "B9AB945E242A1489C0ADF9CDF706BEBEE78DB5EA" : 0,
+    "6E33A4297BA9CCB91CB9C947096F0BC179E99181" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "E4524B5F-89A5-43BD-910E-0C3F3BED98C2",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "B9AB945E242A1489C0ADF9CDF706BEBEE78DB5EA" : "my-Project\/",
+    "6E33A4297BA9CCB91CB9C947096F0BC179E99181" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "my-Project-Car",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "my-Project-Car\/my-Project-Car.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:nice2m\/CarInsurance-Demo.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6E33A4297BA9CCB91CB9C947096F0BC179E99181"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:nice2m\/CarInsurance-Demo.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B9AB945E242A1489C0ADF9CDF706BEBEE78DB5EA"
+    }
+  ]
+}
