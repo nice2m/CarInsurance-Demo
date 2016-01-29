@@ -35,7 +35,6 @@
     
     //设置左边按钮颜色
     UINavigationItem * naviItem = self.navigationItem;
-    
     UIButton * btnBack = [UIButton buttonWithType:UIButtonTypeCustom];
     btnBack.frame = CGRectMake(0, 0, 30, 40);
     [btnBack setImage:[UIImage imageNamed:@"return"] forState:UIControlStateNormal];
