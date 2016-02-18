@@ -208,29 +208,29 @@ static NSString * reuseID5 = @"NewsExpViewCellSingleImg";
     //MJRefresh
     _topHeaderTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         _topCurrentPage = 1;
-        [self requestDataWithCurrentPage:_topCurrentPage andType:_titleManager.newsNaviRequestTitles[0]];
+        [self requestDataWithCurrentPage:_topCurrentPage andType:_titleManager.newsNaviRequestTitles[0] andIsFirst:NO];
     }];
     _topHeaderTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         _topCurrentPage += 1;
-        [self requestDataWithCurrentPage:_topCurrentPage andType:_titleManager.newsNaviRequestTitles[0]];
+        [self requestDataWithCurrentPage:_topCurrentPage andType:_titleManager.newsNaviRequestTitles[0] andIsFirst:NO];
     }];
     
     _infoOfInsuranceTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         _infoCurrentPage = 1;
-        [self requestDataWithCurrentPage:_infoCurrentPage andType:_titleManager.newsNaviRequestTitles[1]];
+        [self requestDataWithCurrentPage:_infoCurrentPage andType:_titleManager.newsNaviRequestTitles[1] andIsFirst:NO];
     }];
     _infoOfInsuranceTableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
         _infoCurrentPage +=1;
-        [self requestDataWithCurrentPage:_infoCurrentPage andType:_titleManager.newsNaviRequestTitles[1]];
+        [self requestDataWithCurrentPage:_infoCurrentPage andType:_titleManager.newsNaviRequestTitles[1] andIsFirst:NO];
     }];
     
     _carExperienceTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         _expCurrentPage = 1;
-        [self requestDataWithCurrentPage:_expCurrentPage andType:_titleManager.newsNaviRequestTitles[2]];
+        [self requestDataWithCurrentPage:_expCurrentPage andType:_titleManager.newsNaviRequestTitles[2] andIsFirst:NO];
     }];
     _carExperienceTableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
         _expCurrentPage +=1;
-        [self requestDataWithCurrentPage:_expCurrentPage andType:_titleManager.newsNaviRequestTitles[2]];
+        [self requestDataWithCurrentPage:_expCurrentPage andType:_titleManager.newsNaviRequestTitles[2] andIsFirst:NO];
     }];
     
     //附加按钮
@@ -240,7 +240,7 @@ static NSString * reuseID5 = @"NewsExpViewCellSingleImg";
 
 #pragma mark - Request data
 
--(void)requestDataWithCurrentPage:(NSInteger)currentPage andType:(NSString *)typeName{
+-(void)requestDataWithCurrentPage:(NSInteger)currentPage andType:(NSString *)typeName andIsFirst:(BOOL)isFirst{
     //创建 AFHttpRequestManager
     AFHTTPRequestOperationManager * manager = [AFHTTPRequestOperationManager manager];
     //manager
@@ -259,12 +259,14 @@ static NSString * reuseID5 = @"NewsExpViewCellSingleImg";
                 
             }
             self.topHeadersData  = [NewsTopHeaderModel  topHeaderModelsWithDictionary:dict];
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (currentPage == 1) {
                     self.topHeaderTableView.mj_footer.hidden = YES;
                 }
                 [self dataCompletedWithTableTag:NEWS_TOPHEADER_TAG];
             });
+            
         }else if([typeName isEqualToString:_titleManager.newsNaviRequestTitles[1]]){
             
             if (currentPage == 1) {
@@ -272,24 +274,27 @@ static NSString * reuseID5 = @"NewsExpViewCellSingleImg";
                 
             }
             self.infoOfInsuranceData = [NewsTopHeaderModel topHeaderModelsWithDictionary:dict];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (currentPage == 1) {
-                    self.infoOfInsuranceTableView.mj_footer.hidden = YES;
-                }
-                [self dataCompletedWithTableTag:NEWS_INFOOFINSURE_TAG];
-            });
-            
+            if (!isFirst) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (currentPage == 1) {
+                        self.infoOfInsuranceTableView.mj_footer.hidden = YES;
+                    }
+                    [self dataCompletedWithTableTag:NEWS_INFOOFINSURE_TAG];
+                });
+            }
         }else if([typeName isEqualToString:_titleManager.newsNaviRequestTitles[2]]){
             if (currentPage == 1) {
                 self.carExperienceData = nil;
             }
             self.carExperienceData = [NewsTopHeaderModel topHeaderModelsWithDictionary:dict];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (currentPage == 1) {
-                    self.carExperienceTableView.mj_footer.hidden = YES;
-                }
-                [self dataCompletedWithTableTag:NEWS_CAREXPERIENCE_TAG];
-            });
+            if (!isFirst) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (currentPage == 1) {
+                        self.carExperienceTableView.mj_footer.hidden = YES;
+                    }
+                    [self dataCompletedWithTableTag:NEWS_CAREXPERIENCE_TAG];
+                });
+            }
         }else{
             NSException * exc = [NSException exceptionWithName:@"error:" reason:@"服务器尚未添加的Type" userInfo:nil];
             @throw exc;
@@ -457,8 +462,9 @@ static NSString * reuseID5 = @"NewsExpViewCellSingleImg";
 
 -(void)secondBtnPressed:(UIButton *)sender{
     if (self.infoOfInsuranceData.count == 0) {
-        [self requestDataWithCurrentPage:1 andType:_titleManager.newsNaviRequestTitles[1]];
+        [self requestDataWithCurrentPage:1 andType:_titleManager.newsNaviRequestTitles[1] andIsFirst:NO];
     }
+    [self.infoOfInsuranceTableView reloadData];
     [self changeBtnsSelectedToNo];
     sender.selected = YES;
     CGPoint offset = CGPointMake(_mainScrollView.frame.size.width, -64);
@@ -468,8 +474,9 @@ static NSString * reuseID5 = @"NewsExpViewCellSingleImg";
 
 -(void)thirdBtnPressed:(UIButton *)sender{
     if (self.carExperienceData.count == 0) {
-        [self requestDataWithCurrentPage:1 andType:_titleManager.newsNaviRequestTitles[2]];
+        [self requestDataWithCurrentPage:1 andType:_titleManager.newsNaviRequestTitles[2] andIsFirst:NO];
     }
+    [self.carExperienceTableView reloadData];
     [self changeBtnsSelectedToNo];
     sender.selected = YES;
     CGPoint offset = CGPointMake(_mainScrollView.frame.size.width * 2, -64);
@@ -479,10 +486,10 @@ static NSString * reuseID5 = @"NewsExpViewCellSingleImg";
 #pragma mark - other
 
 -(void)firstLoad{
-    [self requestDataWithCurrentPage:1 andType:_titleManager.newsNaviRequestTitles[0]];
+    [self requestDataWithCurrentPage:1 andType:_titleManager.newsNaviRequestTitles[0] andIsFirst:YES];
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        [self requestDataWithCurrentPage:1 andType:_titleManager.newsNaviRequestTitles[1]];
-        [self requestDataWithCurrentPage:1 andType:_titleManager.newsNaviRequestTitles[2]];
+        [self requestDataWithCurrentPage:1 andType:_titleManager.newsNaviRequestTitles[1] andIsFirst:YES];
+        [self requestDataWithCurrentPage:1 andType:_titleManager.newsNaviRequestTitles[2]andIsFirst:YES];
     });
     UIButton *btn = self.btnsArr[0];
     btn.selected = YES;

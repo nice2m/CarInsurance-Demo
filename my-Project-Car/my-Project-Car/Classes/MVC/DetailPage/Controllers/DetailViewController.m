@@ -35,6 +35,10 @@
     
 }
 
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [_webViewProgerssView removeFromSuperview];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -129,7 +133,6 @@
     UILongPressGestureRecognizer * gs = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:nil];
     gs.minimumPressDuration  = 0.4;
     [webView addGestureRecognizer:gs];
-    
 }
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
@@ -207,7 +210,6 @@
     [self.navigationController.navigationBar addSubview:_webViewProgerssView];
     NSURLRequest * request = _url?[NSURLRequest requestWithURL:[NSURL URLWithString:_url]]:_request;
     [_webView loadRequest:request];
-    
 }
 
 

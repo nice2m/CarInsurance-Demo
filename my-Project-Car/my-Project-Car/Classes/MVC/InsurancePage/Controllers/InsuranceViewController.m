@@ -194,7 +194,6 @@
 
 #pragma mark - KVO
 
-
 -(void)setupObserver{
     [self addObserver:self forKeyPath:@"firstCanGoBack" options:NSKeyValueObservingOptionNew context:nil];
     [self addObserver:self forKeyPath:@"secondCanGoBack" options:NSKeyValueObservingOptionNew context:nil];
