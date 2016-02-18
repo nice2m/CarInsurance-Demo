@@ -20,3 +20,19 @@ pod 'SDWebImage'
 pod 'AFNetworking','~>2.6.3'
 
 pod 'RESideMenu'
+
+pod 'YYModel'
+
+pod 'Masonry'
+
+pod 'MJRefresh'
+
+pod 'UMengSocial', '~> 4.3'
+
+pod 'MBProgressHUD'
+
+# UIWebView 进度条
+pod 'NJKWebViewProgress'
+
+# 提示框
+pod 'SVProgressHUD'

@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <NJKWebViewProgress.h>
+#import <NJKWebViewProgress/NJKWebViewProgressView.h>
 
 @interface DetailViewController : UIViewController
 
@@ -14,5 +16,8 @@
  *  详情URL地址
  */
 @property(nonatomic,copy)NSString * url;
+
+@property(nonatomic,copy)NSURLRequest * request;
+
 
 @end

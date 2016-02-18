@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
+
+//failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
+
 @interface NewsViewController : BaseViewController
 
 @end
