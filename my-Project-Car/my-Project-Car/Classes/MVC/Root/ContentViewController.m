@@ -22,9 +22,10 @@
     
     NSArray * arrTitle = @[@"主页",
                            @"车险助理",
-                           @"车市风向"];
-    NSArray * imageNames = @[@"news_nor",@"insurance_nor",@"price_chart_nor"];
-    NSArray * imageNamesHL = @[@"news_hl",@"insurance_hl",@"price_chart_hl"];
+                           @"车市风向",
+                           @"汽车堂"];
+    NSArray * imageNames = @[@"news_nor",@"insurance_nor",@"price_chart_nor",@"menu_nor"];
+    NSArray * imageNamesHL = @[@"news_hl",@"insurance_hl",@"price_chart_hl",@"menu_hl"];
     NSArray * childVC = self.childViewControllers;
     for (int i = 0 ; i < childVC.count; i ++) {
         UIViewController * v = childVC[i];
@@ -42,12 +43,12 @@
         hlAttr[NSForegroundColorAttributeName] = [UIColor colorWithRed:0.07 green:0.62 blue:1 alpha:1];
         //FZLanTingHeiS-L-GB FZLTXIHJW--GB1-0
         //hlAttr[NSFontAttributeName] = [UIFont fontWithName:@"FZLTXIHJW--GB1-0" size:14];
-        hlAttr[NSFontAttributeName] = [UIFont systemFontOfSize:12 weight:UIFontWeightBold];
-        [item setTitleTextAttributes: hlAttr forState:UIControlStateHighlighted];
+        hlAttr[NSFontAttributeName] = [UIFont fontWithName:@"FZLTXIHJW--GB1-0" size:12];
+        [item setTitleTextAttributes: hlAttr forState:UIControlStateSelected];
         
         NSMutableDictionary * norAttr = [NSMutableDictionary dictionary];
         norAttr[NSForegroundColorAttributeName] = [UIColor grayColor];
-        norAttr[NSFontAttributeName] = [UIFont systemFontOfSize:12];
+        norAttr[NSFontAttributeName] = [UIFont fontWithName:@"FZLTXIHJW--GB1-0" size:12];
         [item setTitleTextAttributes:norAttr forState:UIControlStateNormal];
     }
     
@@ -61,7 +62,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 /*
 #pragma mark - Navigation
 

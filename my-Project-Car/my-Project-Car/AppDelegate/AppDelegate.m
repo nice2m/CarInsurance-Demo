@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "BaseViewController.h"
+#import "JPUSHService.h"
 
 @interface AppDelegate ()
 {
@@ -23,26 +24,57 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-#if 1
-    _mainSB = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    //创建一个UIWindow对象
-    self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    //设置UIWindow的背景颜色
-    self.window.backgroundColor = [UIColor whiteColor];
-#endif
     
-    
-#if 0
-    _testVC= [ mainSB instantiateViewControllerWithIdentifier:@"BaseViewController"];
-#elif 1
-    _testVC = [_mainSB instantiateViewControllerWithIdentifier:@"DetailViewController"];
-    UINavigationController  * navi = [[UINavigationController alloc]initWithRootViewController:_testVC];
-    self.window.rootViewController = navi ;
-    //显示UIWindow
-    [self.window makeKeyAndVisible];
-#endif
+     // Required
+     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+     //可以添加自定义categories
+     [JPUSHService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
+     UIUserNotificationTypeSound |
+     UIUserNotificationTypeAlert)
+     categories:nil];
+     } else {
+     //categories 必须为nil
+     [JPUSHService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+     UIRemoteNotificationTypeSound |
+     UIRemoteNotificationTypeAlert)
+     categories:nil];
+     }
+    // Required
+    //如需兼容旧版本的方式，请依旧使用[JPUSHService setupWithOption:launchOptions]方式初始化和同时使用pushConfig.plist文件声明appKey等配置内容。
+    [JPUSHService setupWithOption:launchOptions appKey:JPUSH_APP_KEY channel:JPUSH_CHANEL apsForProduction:JPUSH_IS_PRODUCTION];
     return YES;
 }
+
+- (void)application:(UIApplication *)application
+didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    // Required
+    [JPUSHService registerDeviceToken:deviceToken];
+    
+}
+
+
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:
+(NSDictionary *)userInfo {
+    // Required,For systems with less than or equal to iOS6
+    [JPUSHService handleRemoteNotification:userInfo];
+}
+
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    
+    // IOS 7 Support Required
+    [JPUSHService handleRemoteNotification:userInfo];
+    completionHandler(UIBackgroundFetchResultNewData);
+}
+
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    
+    //Optional
+    NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

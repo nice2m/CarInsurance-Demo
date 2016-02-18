@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseViewController.h"
+#import "InsuranceViewController.h"
 
-@interface PriceViewController : BaseViewController
+@interface PriceViewController : InsuranceViewController
 
 @end

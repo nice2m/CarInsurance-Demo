@@ -11,6 +11,28 @@
 
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+/**
+ *  导入文件
+ */
+//自定义Navigation title
+#import "NaviTitlesManager.h"
+//YYModel
+#import <YYModel.h>
+//AFNetworking
+#import <AFNetworking/AFNetworking.h>
+//Masonry
+#import <Masonry/Masonry.h>
+//SDWebImage
+#import <SDWebImage/UIImageView+WebCache.h>
+//Utils
+#import "Utils.h"
+
+#import <MBProgressHUD/MBProgressHUD.h>
+
+#import <SVProgressHUD.h>
+
+
+
 
 /**
  *  尺寸相关
@@ -20,5 +42,59 @@
 #define kSCREEN_SIZE [UIScreen mainScreen].bounds.size
 
 
+
+
+/**
+ *  tag 集合
+ */
+// NewViewController 界面
+#define NEWS_TOPHEADER_TAG 1000
+#define NEWS_INFOOFINSURE_TAG 1001
+#define NEWS_CAREXPERIENCE_TAG 10002
+
+
+
+/**
+ *  API 集合
+ */
+
+//车险行情
+
+//新车报价
+#define PRICE_API_FIRST_REQUEST @"http://auto.news18a.com/init.php?m=price&c=index&a=index&from=chemizhijia"
+//二手好车
+#define PRICE_API_SECOND_REQUEST @"http://luna.58.com/m/cd/car.shtml?utm_source=link&spm=b-35156310760201-me-f-802.shouji_5&-15=20"
+
+
+//车险助手请求页面
+
+//车险超市
+#define INSURANCE_API_FIRST_REQUEST @"http://m.wxb.com.cn/mobile/index?channelNo=B10110&mark=A&channelSite=s01&isBookingSupport=true&isBonusSupport=true&isBannersSupport=true"
+//车险计算
+#define INSURANCE_API_SECOND_REQUEST @"http://wx.weiche.me/calc-insurance.php"
+
+
+//文章详情请求API
+//参数一：文章请求ID
+#define NEWS_API_ARTICAL_DETAIL_FORMATTED @"http://api.autoins.app887.com/article.html?id=%ld"
+
+//http://api.autoins.app887.com/api/Articles.action?keyword=   &npc=   0&opc=   20&type=   %E8%BD%A6%E9%99%A9%E8%B5%84%E8%AE%AF&uid=931
+//http://api.autoins.app887.com/api/Articles.action?keyword=&npc=0&opc=20&type=%E8%BD%A6%E9%99%A9%E8%B5%84%E8%AE%AF&uid=931
+//参数1：  npc  请求数据条数     eg:20
+//参数2：  type 请求数据的类型 eg:"车闻头条"
+#define NEWS_API_TOPHEADER_FORMATTERED @"http://api.autoins.app887.com/api/Articles.action?keyword=&npc=0&opc=%ld&type=%@"
+
+
+/**
+ *  激光推送
+ *  [JPUSHService setupWithOption:launchOptions appKey:appKey channel:channel apsForProduction:isProduction];
+ */
+//JPUSH 的APP_KEY
+#define JPUSH_APP_KEY @"2c212f019919e917e33c8ef5"
+
+//应用程序包的下载渠道 方便渠道统计局
+#define JPUSH_CHANEL @"App Store"
+//是否生产环境
+#define JPUSH_IS_PRODUCTION YES
 
 #endif /* PrefixHeader_pch */
