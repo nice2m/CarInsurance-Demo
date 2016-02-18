@@ -97,4 +97,12 @@
 //是否生产环境
 #define JPUSH_IS_PRODUCTION YES
 
+/**
+ *  友盟分享
+ */
+//友盟分享appKey
+#define UMSOCIAL_APP_KEY @"56c5c47de0f55a99b4001536"
+
+
+
 #endif /* PrefixHeader_pch */

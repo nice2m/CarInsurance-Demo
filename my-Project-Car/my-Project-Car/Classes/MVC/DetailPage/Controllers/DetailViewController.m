@@ -8,8 +8,9 @@
 
 #import "DetailViewController.h"
 #import "ShowImagesPageViewController.h"
+#import <UMSocial.h>
 
-@interface DetailViewController ()<UIWebViewDelegate,NJKWebViewProgressDelegate>
+@interface DetailViewController ()<UIWebViewDelegate,NJKWebViewProgressDelegate,UMSocialUIDelegate>
 
 @property(nonatomic,strong)UIWebView * webView;
 
@@ -26,6 +27,12 @@
     
     //titleView
     //UILabel * _naviTitleLabel;
+    
+    //工具条上面的按钮
+    UIButton * _favBtn;
+    UIButton * _recommendBtn;
+    UIButton * _messageBtn;
+    UIButton * _shareBtn;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -63,40 +70,42 @@
     [btnBack addTarget:self action:@selector(backPressed:) forControlEvents:UIControlEventTouchUpInside];
     naviItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btnBack];
    
-    UIButton  * favBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    favBtn.frame = CGRectMake(0, 0, 40, 40);
-    [favBtn addTarget:self action:@selector(favPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [favBtn setImage:[UIImage imageNamed:@"fav_1"]forState:UIControlStateNormal];
-    [favBtn setImage:[UIImage imageNamed:@"fav_2"] forState:UIControlStateSelected];
-    naviItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:favBtn];
+    _favBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _favBtn.frame = CGRectMake(0, 0, 40, 40);
+    [_favBtn addTarget:self action:@selector(favPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [_favBtn setImage:[UIImage imageNamed:@"fav_1"]forState:UIControlStateNormal];
+    [_favBtn setImage:[UIImage imageNamed:@"fav_2"] forState:UIControlStateSelected];
+    naviItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:_favBtn];
     
     
     
     CGFloat btnW = kSCREEN_SIZE.width / 5 ;
-    UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(0, 0, btnW, 60);
+    _recommendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _recommendBtn.frame = CGRectMake(0, 0, btnW, 60);
+    
     
     UIImage * imgNor = [UIImage imageNamed:@"recommend"];
     UIImage * imgSel = [UIImage imageNamed:@"recommend_1"];
-    [btn setImage:imgNor forState:UIControlStateNormal];
-    [btn setImage:imgSel forState:UIControlStateSelected];
-    [btn addTarget:self action:@selector(recommendPressed:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem * firstItem = [[UIBarButtonItem alloc]initWithCustomView:btn];
+    [_recommendBtn setImage:imgNor forState:UIControlStateNormal];
+    [_recommendBtn setImage:imgSel forState:UIControlStateSelected];
+    [_recommendBtn addTarget:self action:@selector(recommendPressed:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem * firstItem = [[UIBarButtonItem alloc]initWithCustomView:_recommendBtn];
     
-    UIButton * btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn1.frame = CGRectMake(0, 0, btnW, 40);
+    _messageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _messageBtn.frame = CGRectMake(0, 0, btnW, 40);
     
     UIImage *imgnor1 = [UIImage imageNamed:@"message"];
-    [btn1 setImage:imgnor1 forState:UIControlStateNormal];
-    [btn1 addTarget:self action:@selector(messagePressed:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem * secondItem = [[UIBarButtonItem alloc]initWithCustomView:btn1];
+    [_messageBtn setImage:imgnor1 forState:UIControlStateNormal];
+    [_messageBtn addTarget:self action:@selector(messagePressed:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem * secondItem = [[UIBarButtonItem alloc]initWithCustomView:_messageBtn];
     
-    UIButton * btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
+    _shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage * imgNor2 = [UIImage imageNamed:@"share"];
-    [btn2 setImage: imgNor2 forState:UIControlStateNormal];
-    [btn2 addTarget:self action:@selector(sharePressed:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem * thirdItem = [[UIBarButtonItem alloc]initWithCustomView:btn2];
-    btn2.frame = CGRectMake(0, 0, btnW, 40);
+    [_shareBtn setImage: imgNor2 forState:UIControlStateNormal];
+    [_shareBtn addTarget:self action:@selector(sharePressed:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem * thirdItem = [[UIBarButtonItem alloc]initWithCustomView:_shareBtn];
+    _shareBtn.frame = CGRectMake(0, 0, btnW, 40);
+    _shareBtn.enabled = NO;
     //btn2.frame = btn.frame;
     //self.toolbarItems = @[firstItem];
     //显示ToolBar
@@ -129,6 +138,9 @@
 //    self.navigationItem.titleView =lab;
     //停止小菊花
     [Utils networkStopRefreshing];
+    
+    _shareBtn.enabled = YES;
+    
     //禁用长按弹出菜单
     UILongPressGestureRecognizer * gs = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:nil];
     gs.minimumPressDuration  = 0.4;
@@ -177,10 +189,18 @@
 }
 
 -(void)sharePressed:(UIButton *)sender{
-    [Utils noticeUpdateOnWay];
+    
+    //[Utils noticeUpdateOnWay];
+    
+    NSString * shareString = [NSString stringWithFormat:@"%@小伙伴围观：%@",[_webView stringByEvaluatingJavaScriptFromString:@"document.title"],_url];
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:UMSOCIAL_APP_KEY
+                                      shareText:shareString
+                                     shareImage:nil
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToTencent,UMShareToWechatTimeline,UMShareToRenren,UMShareToDouban,UMShareToEmail,nil]
+                                       delegate:self];
 }
 #pragma mark - NJKWebViewDelegate
-
 -(void)webViewProgress:(NJKWebViewProgress *)webViewProgress updateProgress:(float)progress{
     
     [_webViewProgerssView setProgress:progress animated:YES];
@@ -213,6 +233,19 @@
 }
 
 
+#pragma mark - UMengSocialDelegate
+
+-(void)didSelectSocialPlatform:(NSString *)platformName withSocialData:(UMSocialData *)socialData{
+    
+}
+
+-(void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response{
+    if (response.responseCode == UMSResponseCodeSuccess) {
+        [SVProgressHUD showInfoWithStatus:@"分享成功！"];
+    }else{
+        [SVProgressHUD showErrorWithStatus:@"分享失败，请重试"];
+    }
+}
 @end
 
 

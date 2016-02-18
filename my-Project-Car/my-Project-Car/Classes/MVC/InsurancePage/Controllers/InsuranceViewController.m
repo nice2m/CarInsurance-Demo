@@ -25,6 +25,7 @@
     
     [self createNJKWebView];
     [self.navigationController.view addSubview:self.backBtn];
+    self.view.backgroundColor = [UIColor greenColor];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -97,7 +98,7 @@
     NSURLRequest * request2 = [NSURLRequest requestWithURL:[NSURL URLWithString:self.secondUrl]];
     [self.webViewSecond loadRequest:request2];
     
-    self.containerScrollView.backgroundColor = [UIColor redColor];
+    //self.containerScrollView.backgroundColor = [UIColor redColor];
     [self setupObserver];
     
 }

@@ -359,7 +359,6 @@
 		BC4093401C59AC3C00688CD6 /* MVC */ = {
 			isa = PBXGroup;
 			children = (
-				5606B4551C610BE30095836A /* IndividualPage */,
 				56997B4A1C5F064A0069C849 /* ShowImagesPage */,
 				BC4093571C59ADA000688CD6 /* RESideMenu */,
 				BC4093581C59ADA000688CD6 /* Root */,
@@ -368,6 +367,7 @@
 				BC4093451C59AC3C00688CD6 /* NewsPage */,
 				BC4093411C59AC3C00688CD6 /* InsurancePage */,
 				BC4093491C59AC3C00688CD6 /* PricePage */,
+				5606B4551C610BE30095836A /* IndividualPage */,
 				BC40938F1C5A556000688CD6 /* DetailPage */,
 			);
 			path = MVC;
@@ -1003,6 +1003,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Hao LUO (F3ZCSW6X45)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/my-Project-Car/PrefixHeader.pch";
 				INFOPLIST_FILE = "my-Project-Car/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1024,6 +1025,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Hao LUO (F3ZCSW6X45)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/my-Project-Car/PrefixHeader.pch";
 				INFOPLIST_FILE = "my-Project-Car/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

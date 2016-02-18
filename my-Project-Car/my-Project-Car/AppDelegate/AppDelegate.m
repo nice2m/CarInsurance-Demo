@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "BaseViewController.h"
 #import "JPUSHService.h"
+#import <UMSocial.h>
 
 @interface AppDelegate ()
 {
@@ -25,6 +26,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    //极光推送配置文件区域
      // Required
      if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
      //可以添加自定义categories
@@ -42,6 +44,12 @@
     // Required
     //如需兼容旧版本的方式，请依旧使用[JPUSHService setupWithOption:launchOptions]方式初始化和同时使用pushConfig.plist文件声明appKey等配置内容。
     [JPUSHService setupWithOption:launchOptions appKey:JPUSH_APP_KEY channel:JPUSH_CHANEL apsForProduction:JPUSH_IS_PRODUCTION];
+    
+    
+    //友盟分享配置区域
+    [UMSocialData setAppKey:UMSOCIAL_APP_KEY];
+    
+    
     return YES;
 }
 
