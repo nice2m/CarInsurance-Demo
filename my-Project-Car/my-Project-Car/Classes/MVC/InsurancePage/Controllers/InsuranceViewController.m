@@ -25,7 +25,8 @@
     
     [self createNJKWebView];
     [self.navigationController.view addSubview:self.backBtn];
-    self.view.backgroundColor = [UIColor greenColor];
+    //self.view.backgroundColor = [UIColor greenColor];
+    //self.containerScrollView.backgroundColor = [UIColor blueColor];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -129,7 +130,6 @@
         self.secondCanGoBack = [NSString stringWithFormat:@"%u",arc4random()];
     }
 }
-
 
 //即将开始跳转
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
